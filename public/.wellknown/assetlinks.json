@@ -1,9 +1,0 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.fx.fxtest",
-    "sha256_cert_fingerprints":
-    ["E7:1D:98:29:78:ED:C8:EF:D8:57:E0:94:F1:D9:53:2E:5F:C2:C9:73:9C:78:2B:FD:0D:14:96:BE:4C:0D:4A:95"]
-  }
-}]
