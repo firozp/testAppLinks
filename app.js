@@ -9,7 +9,11 @@ app.get("/redirect", (req,res)=>{
     if(req.query && req.query.articleId) {
         r = `${req.query.articleId}[${r}]`
     }
-    res.redirect(`https://testapplinks.onrender.com/test?articleId=${r}`)
+    return res.redirect(`https://testapplinks.onrender.com/test?articleId=${r}`)
+})
+
+app.get("/test",(req,res)=>{
+    return res.send(`<h1> Loading article ${req.query.articleId}`)
 })
 
 app.listen(3000,()=>{
