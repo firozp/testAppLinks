@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web share test</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <h1>web Share Demo</h1>
+
+    <p><button>Test Share Article!</button></p>
+
+    <p class="result"></p>
+
+    <script>
+      let shareData = {
+        title: 'TEST',
+        text: 'Have you read this article?',
+        url: 'https://afr.com/',
+      }
+
+      const btn = document.querySelector('button');
+      const resultPara = document.querySelector('.result');
+
+      btn.addEventListener('click', () => {
+        navigator.share(shareData)
+          .then(() =>
+            resultPara.textContent = 'Article Shared'
+          )
+          .catch((e) =>
+            resultPara.textContent = 'Error: ' + e
+          )
+      });
+    </script>
+  </body>
+</html>
