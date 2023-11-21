@@ -9,7 +9,7 @@
     </style>
   </head>
   <body>
-    <h1>web Share Demo</h1>
+    <h1>Web Share Demo</h1>
     <p class="deviceType"></p>
     <p><button>Test Share Article!</button></p>
 
@@ -25,7 +25,21 @@
           return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       }
 
-      const canShareData = navigator.canShare()
+      let shareData = {
+        title: 'TEST',
+        text: 'Have you read this article?',
+        url: 'https://afr.com/',
+      }
+
+      let canShareData = ''
+
+      if (!navigator.canShare) {
+       canShareData = 'Cannot be checked'
+      } else if (navigator.canShare(shareData)) {
+        canShareData = 'Yes'
+      } else {
+        canShareData = 'No'
+      }
 
       if (hasTouchSupport()) {
         deviceType.textContent = `Mobile Device, canShare: ${canShareData}`
@@ -33,11 +47,7 @@
         deviceType.textContent = `Desktop Device, canShare: ${canShareData}`
       }
 
-      let shareData = {
-        title: 'TEST',
-        text: 'Have you read this article?',
-        url: 'https://afr.com/',
-      }
+      
 
       btn.addEventListener('click', () => {
         navigator.share(shareData)
