@@ -10,20 +10,35 @@
   </head>
   <body>
     <h1>web Share Demo</h1>
-
+    <p class="deviceType"></p>
     <p><button>Test Share Article!</button></p>
 
     <p class="result"></p>
 
     <script>
+
+      const btn = document.querySelector('button');
+      const resultPara = document.querySelector('.result');
+      const deviceType = document.querySelector('.deviceType');
+
+      function hasTouchSupport() {
+          return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      }
+
+      if (hasTouchSupport()) {
+        deviceType.textContent = 'Mobile Device'
+      } else {
+        deviceType.textContent = 'Desktop Device'
+      }
+
+      const isMobiledevice = navigator.maxTouchPoints
       let shareData = {
         title: 'TEST',
         text: 'Have you read this article?',
         url: 'https://afr.com/',
       }
 
-      const btn = document.querySelector('button');
-      const resultPara = document.querySelector('.result');
+      
 
       btn.addEventListener('click', () => {
         navigator.share(shareData)
