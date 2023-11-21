@@ -25,20 +25,19 @@
           return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       }
 
+      const canShareData = navigator.canShare()
+
       if (hasTouchSupport()) {
-        deviceType.textContent = 'Mobile Device'
+        deviceType.textContent = `Mobile Device, canShare: ${canShareData}`
       } else {
-        deviceType.textContent = 'Desktop Device'
+        deviceType.textContent = `Desktop Device, canShare: ${canShareData}`
       }
 
-      const isMobiledevice = navigator.maxTouchPoints
       let shareData = {
         title: 'TEST',
         text: 'Have you read this article?',
         url: 'https://afr.com/',
       }
-
-      
 
       btn.addEventListener('click', () => {
         navigator.share(shareData)
