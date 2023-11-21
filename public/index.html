@@ -25,29 +25,17 @@
           return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
       }
 
-      let shareData = {
+      const shareData = {
         title: 'TEST',
         text: 'Have you read this article?',
         url: 'https://afr.com/',
       }
 
-      let canShareData = ''
+      const canShareData = !!navigator.canShare && navigator.canShare(shareData)
 
-      if (!navigator.canShare) {
-       canShareData = 'Cannot be checked'
-      } else if (navigator.canShare(shareData)) {
-        canShareData = 'Yes'
-      } else {
-        canShareData = 'No'
-      }
-
-      if (hasTouchSupport()) {
-        deviceType.textContent = `Mobile Device, canShare: ${canShareData}`
-      } else {
-        deviceType.textContent = `Desktop Device, canShare: ${canShareData}`
-      }
-
+      const isMobile = hasTouchSupport()
       
+      deviceType.textContent = isMobile?`Mobile Device, canShare: ${canShareData}`:`Desktop Device, canShare: ${canShareData}`
 
       btn.addEventListener('click', () => {
         navigator.share(shareData)
@@ -55,7 +43,7 @@
             resultPara.textContent = 'Article Shared'
           )
           .catch((e) =>
-            resultPara.textContent = 'Error: ' + e
+            resultPara.textContent = 'Share failed : ' + e
           )
       });
     </script>
