@@ -21,8 +21,14 @@
       const resultPara = document.querySelector('.result');
       const deviceType = document.querySelector('.deviceType');
 
-      function hasTouchSupport() {
-          return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      function isMobileDevice() {
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+          return true;
+        } else if ('maxTouchPoints' in navigator && navigator.maxTouchPoints > 0) {
+          return true;
+        } else {
+          return false;
+        }
       }
 
       const shareData = {
@@ -33,7 +39,7 @@
 
       const canShareData = !!navigator.canShare && navigator.canShare(shareData)
 
-      const isMobile = hasTouchSupport()
+      const isMobile = isMobileDevice()
       
       deviceType.textContent = isMobile?`Mobile Device, canShare: ${canShareData}`:`Desktop Device, canShare: ${canShareData}`
 
