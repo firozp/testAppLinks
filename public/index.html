@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Web share test</title>
-    <style>
-
-    </style>
   </head>
   <body>
     <h1>Web Share Demo</h1>
@@ -32,8 +27,8 @@
       }
 
       const shareData = {
-        title: 'TEST',
-        text: 'Have you read this article?',
+        title: 'Super Article',
+        text: 'Hey, have you read this article?',
         url: 'https://afr.com/',
       }
 
@@ -42,8 +37,9 @@
       const isMobile = isMobileDevice()
       
       deviceType.textContent = isMobile?`Mobile Device, canShare: ${canShareData}`:`Desktop Device, canShare: ${canShareData}`
-
+	  
       btn.addEventListener('click', () => {
+		if(isMobile && canShareData){
         navigator.share(shareData)
           .then(() =>
             resultPara.textContent = 'Article Shared'
@@ -51,6 +47,16 @@
           .catch((e) =>
             resultPara.textContent = 'Share failed : ' + e
           )
+		} else {
+			navigator.clipboard.writeText("https://afr.com/").then(
+			() => {
+				resultPara.textContent = 'Article link copied to clipboard'
+			},
+			() => {
+				resultPara.textContent = 'Could not copy link to clipboard'
+			},
+			);
+		}
       });
     </script>
   </body>
