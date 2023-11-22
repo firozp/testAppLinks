@@ -17,9 +17,9 @@
       const deviceType = document.querySelector('.deviceType');
 
       function isMobileDevice() {
-        if (/Mobi|Android/i.test(navigator.userAgent)) {
+        if ('maxTouchPoints' in navigator && navigator.maxTouchPoints > 0) {
           return true;
-        } else if ('maxTouchPoints' in navigator && navigator.maxTouchPoints > 0) {
+        } else if (/Mobi|Android/i.test(navigator.userAgent)) {
           return true;
         } else {
           return false;
